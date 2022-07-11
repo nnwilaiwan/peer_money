@@ -8,6 +8,7 @@ import 'package:peer_money/models/appTextSetting.dart';
 import 'package:peer_money/models/getAction.dart';
 import 'package:peer_money/models/reducer.dart';
 import 'package:peer_money/screens/assets/assetsScreen.dart';
+import 'package:peer_money/screens/deposit/depositScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreenDetail.dart';
 import 'package:peer_money/testCode/pieChart.dart';
@@ -48,6 +49,11 @@ class MyApp extends StatelessWidget {
           },
           AssetsScreen.id: (context) {
             return AssetsScreen(onInit: () {
+              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+            });
+          },
+          DepositScreen.id: (context) {
+            return DepositScreen(onInit: () {
               StoreProvider.of<AppState>(context).dispatch(getLoginAction);
             });
           },

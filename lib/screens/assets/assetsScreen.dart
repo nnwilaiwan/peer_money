@@ -99,27 +99,32 @@ class _AssetsScreenState extends State<AssetsScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 145,
-                            height: 38,
-                            decoration: BoxDecoration(
-                              color: AppTextSetting.COLOR_PRIMARY,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 1,
+                          InkWell(
+                            onTap: (){
+                              
+                            },
+                            child: Container(
+                              width: 145,
+                              height: 38,
+                              decoration: BoxDecoration(
+                                color: AppTextSetting.COLOR_PRIMARY,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
                               ),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Deposit',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: AppTextSetting.APP_FONT,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Deposit',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: AppTextSetting.APP_FONT,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                             ),
                           ),
