@@ -51,8 +51,8 @@ class _HomeScreenDetialState extends State<HomeScreenDetial> {
               margin: const EdgeInsets.only(top: 30, left: 20),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:const [
-                   Text(
+                children: const [
+                  Text(
                     'Hi',
                     style: TextStyle(
                       color: Colors.white,
@@ -61,8 +61,8 @@ class _HomeScreenDetialState extends State<HomeScreenDetial> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                   SizedBox(width: 10),
-                   Text(
+                  SizedBox(width: 10),
+                  Text(
                     'Simpsom',
                     style: TextStyle(
                       color: Colors.white,
@@ -76,15 +76,15 @@ class _HomeScreenDetialState extends State<HomeScreenDetial> {
               ),
             ),
           ),
-           Align(
+          Align(
             alignment: Alignment.bottomRight,
-             child: Image.asset(
-                'assets/images/haed-home.png',
-                width: 300.0,
-                height: 190.0,
-                fit: BoxFit.cover,
-              ),
-           ),
+            child: Image.asset(
+              'assets/images/haed-home.png',
+              width: 300.0,
+              height: 190.0,
+              fit: BoxFit.cover,
+            ),
+          ),
           if (verify == false)
             Align(
               alignment: Alignment.bottomCenter,
@@ -157,7 +157,41 @@ class _HomeScreenDetialState extends State<HomeScreenDetial> {
                                   ),
                                 ),
                               ),
-                              Container(
+                              InkWell(
+                                child: Container(
+                                  width: 145,
+                                  height: 38,
+                                  decoration: BoxDecoration(
+                                    color: AppTextSetting.COLOR_PRIMARY,
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Verify Me',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: AppTextSetting.APP_FONT,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                ),
+                                  onTap: () {
+                                      setState(() {
+                                        verify = true;
+                                        print(verify);
+                                      });
+
+                                      widget.onInit();
+                                    },
+                              ),
+                              /* Container(
                                 width: 150,
                                 height: 40,
                                 padding: const EdgeInsets.only(
@@ -167,9 +201,9 @@ class _HomeScreenDetialState extends State<HomeScreenDetial> {
                                       Radius.circular(15)),
                                   child: ElevatedButton(
                                     style: const ButtonStyle(
-                                      backgroundColor: MaterialStatePropertyAll(
-                                        AppTextSetting.COLOR_PRIMARY,
-                                      ),
+                                      // backgroundColor: MaterialStateProperty(
+                                      //   AppTextSetting.COLOR_PRIMARY,
+                                      // ),
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -189,7 +223,7 @@ class _HomeScreenDetialState extends State<HomeScreenDetial> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),*/
                             ],
                           ),
                         ),
@@ -344,7 +378,7 @@ class _HomeScreenDetialState extends State<HomeScreenDetial> {
                                 child: pressed == true
                                     ? const FaIcon(
                                         FontAwesomeIcons.toggleOn,
-                                        color: Colors.grey,
+                                        color: AppTextSetting.COLOR_PRIMARY,
                                         size: 30,
                                       )
                                     : const FaIcon(

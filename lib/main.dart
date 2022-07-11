@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
               StoreProvider.of<AppState>(context).dispatch(getLoginAction);
             });
           },
-            AssetsScreen.id: (context) {
+          AssetsScreen.id: (context) {
             return AssetsScreen(onInit: () {
               StoreProvider.of<AppState>(context).dispatch(getLoginAction);
             });
@@ -122,7 +122,7 @@ class _SplashPageState extends State<SplashPage> {
           height: heightScreen,
           width: widthScreen,
           fit: BoxFit.fitHeight,
-          // ÷\scale: 10,
+          // scale: 10,
         ),
         backgroundColor: AppTextSetting.COLOR_PRIMARY,
         photoSize: heightScreen * 0.19,

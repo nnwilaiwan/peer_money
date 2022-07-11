@@ -61,9 +61,9 @@ class VerifyCard {
                     borderRadius: const BorderRadius.all(Radius.circular(15)),
                     child: ElevatedButton(
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                          AppTextSetting.COLOR_PRIMARY,
-                        ),
+                        // backgroundColor: MaterialStatePropertyAll(
+                        //   AppTextSetting.COLOR_PRIMARY,
+                        // ),
                       ),
                       onPressed: press,
                       child: Text(
