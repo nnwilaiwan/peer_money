@@ -1,0 +1,6 @@
+package com.assuretechnology.peer_money
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
