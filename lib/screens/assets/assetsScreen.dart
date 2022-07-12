@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:peer_money/models/appState.dart';
 import 'package:peer_money/models/appTextSetting.dart';
+import 'package:peer_money/models/getAction.dart';
+import 'package:peer_money/screens/deposit/depositScreen.dart';
+import 'package:peer_money/testCode/tabbar.dart';
 
 class AssetsScreen extends StatefulWidget {
   static const String id = "AssetsScreen";
@@ -21,7 +24,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
       card.add(InkWell(
         onTap: () {},
         child: Container(
-          height: 134,
+            height: 134,
             color: Colors.white,
             child: Column(
               children: [
@@ -100,8 +103,18 @@ class _AssetsScreenState extends State<AssetsScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
-                            onTap: (){
-                              
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DepositScreen(
+                                          onInit: () {
+                                            StoreProvider.of<AppState>(context)
+                                                .dispatch(getLoginAction);
+                                          },
+                                          title: item[i]['title'].toString(),
+                                        )),
+                              );
                             },
                             child: Container(
                               width: 145,
@@ -128,27 +141,39 @@ class _AssetsScreenState extends State<AssetsScreen> {
                               ),
                             ),
                           ),
-                          Container(
-                            width: 145,
-                            height: 38,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: AppTextSetting.COLOR_PRIMARY,
-                                width: 1,
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TestScreen(
+                                    title: item[i]['title'].toString(),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 145,
+                              height: 38,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: AppTextSetting.COLOR_PRIMARY,
+                                  width: 1,
+                                ),
                               ),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Withdraw',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: AppTextSetting.COLOR_PRIMARY,
-                                    fontFamily: AppTextSetting.APP_FONT,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Withdraw',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: AppTextSetting.COLOR_PRIMARY,
+                                      fontFamily: AppTextSetting.APP_FONT,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                             ),
                           ),

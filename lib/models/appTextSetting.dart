@@ -60,4 +60,35 @@ class AppTextSetting {
       "value2": "~฿4,560,000.00",
     }
   ];
+
+  //Deposit
+
+  static const dynamic DEPOSIT_LIST = [
+    {
+      "address": "1FyMtiZkos6NGaroZH4v",
+      "date": "23.03.2017",
+      "value": "+ 0.1211234 ETH",
+    },
+    {
+      "address": "1HB5XMLmzFVj8ALj6mf",
+      "date": "21.03.2017",
+      "value": "+ 2.3245234 ETH",
+    },
+    {
+      "address": "1LYm7jrZeZaEo7rye2SN",
+      "date": "20.03.2017",
+      "value": "- 0.1211234 ETH",
+    },
+    {
+      "address": "1FyMtiZkos6NGaroZH4v",
+      "date": "19.03.2017",
+      "value": "+ 2.3245234 ETH",
+    },
+     {
+      "address": "1HB5XMLmzFVj8ALj6mf",
+      "date": "18.03.2017",
+      "value": "+ 2.3245234 ETH",
+    },
+  
+  ];
 }

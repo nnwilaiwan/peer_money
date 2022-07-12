@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           DepositScreen.id: (context) {
             return DepositScreen(onInit: () {
               StoreProvider.of<AppState>(context).dispatch(getLoginAction);
-            });
+            },title: null,);
           },
           PieChartTest.id: (context) {
             return PieChartTest(onInit: () {
