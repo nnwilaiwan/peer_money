@@ -47,7 +47,12 @@ dependencies:
   syncfusion_flutter_charts: ^20.2.36
   shared_preferences: ^2.0.15
   qr_flutter: ^4.0.0
-  fluttertoast: ^7.1.8
+  fluttertoast: ^8.0.9
+  image_gallery_saver: '^1.7.1'
+  dio: ^4.0.6
+  path_provider: ^2.0.11
+  permission_handler: ^10.0.0
+  gallery_saver: ^2.3.2
 
 dev_dependencies:
   flutter_test:

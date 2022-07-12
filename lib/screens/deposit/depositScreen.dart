@@ -1,10 +1,18 @@
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:peer_money/models/appState.dart';
 import 'package:peer_money/models/appTextSetting.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:ui' as ui;
 
 class DepositScreen extends StatefulWidget {
   static const String id = "DepositScreen";
@@ -19,6 +27,42 @@ class DepositScreen extends StatefulWidget {
 
 class _DepositScreenState extends State<DepositScreen> {
   final depositAddress = TextEditingController();
+
+  GlobalKey _globalKey = GlobalKey();
+
+  _requestPermission() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+    ].request();
+
+    final info = statuses[Permission.storage].toString();
+    print(info);
+    _toastInfo(info);
+  }
+
+  _saveScreen() async {
+    try {
+      RenderRepaintBoundary boundary = _globalKey.currentContext!
+          .findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage();
+      ByteData? byteData =
+          await (image.toByteData(format: ui.ImageByteFormat.png));
+      if (byteData != null) {
+        final result = await ImageGallerySaver.saveImage(
+            byteData.buffer.asUint8List(),
+            quality: 1080,
+            name: 'qr-code-deposit');
+        print(result);
+        // _toastInfo(result.toString());
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  _toastInfo(String info) {
+    Fluttertoast.showToast(msg: info, toastLength: Toast.LENGTH_LONG);
+  }
 
   void initState() {
     depositAddress.text = 'Oxa335xerwerwjk4w2342432D52qWERz56';
@@ -187,18 +231,19 @@ class _DepositScreenState extends State<DepositScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Align(
+                  Container(
                     alignment: Alignment.center,
-                    child: Container(
-                      width: 200,
-                      height: 200,
+                    width: 200,
+                    height: 200,
+                    child: RepaintBoundary(
+                      key: _globalKey,
                       child: QrImage(
                         data: depositAddress.text,
                         version: QrVersions.auto,
                         size: 200,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -208,6 +253,7 @@ class _DepositScreenState extends State<DepositScreen> {
                 children: [
                   InkWell(
                     onTap: () {
+                      _saveScreen();
                       Navigator.of(context).pop();
                     },
                     child: Container(
@@ -421,7 +467,8 @@ class _DepositScreenState extends State<DepositScreen> {
                               onTap: () {
                                 // _showMyDialogCopy(widthScreen, heightScreen);
                                 Fluttertoast.showToast(
-                                    msg: " Destination Address Copied to Clipboard ",
+                                    msg:
+                                        "Destination Address Copied to Clipboard",
                                     toastLength: Toast.LENGTH_SHORT,
                                     gravity: ToastGravity.TOP,
                                     timeInSecForIosWeb: 1,
@@ -505,6 +552,59 @@ class _DepositScreenState extends State<DepositScreen> {
                             fontSize: 14,
                           ),
                         ),
+                        /*Container(
+                          alignment: Alignment.center,
+                          width: 200,
+                          height: 200,
+                          child: RepaintBoundary(
+                            key: _globalKey,
+                            child: QrImage(
+                              // key: _globalKey,
+                              data: depositAddress.text,
+                              version: QrVersions.auto,
+                              size: 200,
+                            ),
+                          ),
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                _saveScreen();
+                                // Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                width: 162,
+                                height: 38,
+                                margin: const EdgeInsets.only(bottom: 20),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: AppTextSetting.COLOR_PRIMARY,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Container(
+                                  width: 185,
+                                  height: 45,
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: const Text(
+                                    'Download',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: AppTextSetting.COLOR_PRIMARY,
+                                        fontFamily: AppTextSetting.APP_FONT,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),*/
                         Container(
                           height: 500,
                           child: SingleChildScrollView(
