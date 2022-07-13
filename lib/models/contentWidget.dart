@@ -9,6 +9,7 @@ import 'package:peer_money/screens/homeScreen/homeScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreenDetail.dart';
 import 'package:peer_money/testCode/pieChart.dart';
 import 'package:peer_money/testCode/testCardVerify.dart';
+import 'package:peer_money/testCode/testCode.dart';
 
 class ContentWidget extends StatefulWidget {
   final int screenTabIndex;
@@ -41,17 +42,24 @@ class _ContentWidgetState extends State<ContentWidget> {
         }
       case 1:
         {
-            {
-          return AssetsScreen(
-            onInit: () {
-              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
-            },
-            // initScreen: 0,
-            // tabIndex: 0,
-          );
+          {
+            return AssetsScreen(
+              onInit: () {
+                StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+              },
+              // initScreen: 0,
+              // tabIndex: 0,
+            );
+          }
+          // return TestVerifyCard();
         }
-        // return TestVerifyCard();
-        }
+
+      // case 2:
+      //   {
+      //     {
+      //       return const TermsAndConditionsPage();
+      //     }
+      //   }
 
       default:
         {

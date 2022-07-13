@@ -66,29 +66,48 @@ class AppTextSetting {
   static const dynamic DEPOSIT_LIST = [
     {
       "address": "1FyMtiZkos6NGaroZH4v",
-      "date": "23.03.2017",
+      "date": "23.03.2017  15:43",
       "value": "+ 0.1211234 ETH",
+      "status": "Pending"
     },
     {
       "address": "1HB5XMLmzFVj8ALj6mf",
-      "date": "21.03.2017",
+      "date": "21.03.2022  10:20",
       "value": "+ 2.3245234 ETH",
+      "status": "Completed"
     },
     {
       "address": "1LYm7jrZeZaEo7rye2SN",
-      "date": "20.03.2017",
-      "value": "- 0.1211234 ETH",
+      "date": "20.03.2022  09:00",
+      "value": "- 2.5 ETH",
+      "status": "Completed"
     },
     {
       "address": "1FyMtiZkos6NGaroZH4v",
-      "date": "19.03.2017",
-      "value": "+ 2.3245234 ETH",
+      "date": "19.03.2022  20:35 ",
+      "value": "- 4 ETH",
+      "status": "Fail"
     },
-     {
+    {
       "address": "1HB5XMLmzFVj8ALj6mf",
-      "date": "18.03.2017",
-      "value": "+ 2.3245234 ETH",
+      "date": "18.03.2022  17:00",
+      "value": "+ 2 ETH",
+      "status": "Completed"
     },
-  
+  ];
+
+  static const dynamic SELECT_NETWORK = [
+    {
+      "id": "1",
+      "name": "Ethereum (ERC20)",
+    },
+    {
+      "id": "2",
+      "name": "BNB Smart Chain (BEP20)",
+    },
+    {
+      "id": "3",
+      "name": "Arbitrum One",
+    },
   ];
 }

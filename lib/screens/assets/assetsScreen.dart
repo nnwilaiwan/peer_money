@@ -3,7 +3,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:peer_money/models/appState.dart';
 import 'package:peer_money/models/appTextSetting.dart';
 import 'package:peer_money/models/getAction.dart';
-import 'package:peer_money/screens/deposit/depositScreen.dart';
+import 'package:peer_money/screens/widgets/deposit/depositScreen.dart';
+import 'package:peer_money/screens/widgets/withdraw/withdrawScreen.dart';
 import 'package:peer_money/testCode/tabbar.dart';
 
 class AssetsScreen extends StatefulWidget {
@@ -146,7 +147,11 @@ class _AssetsScreenState extends State<AssetsScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => TestScreen(
+                                  builder: (context) => WithdrawScreen(
+                                    onInit: () {
+                                      StoreProvider.of<AppState>(context)
+                                          .dispatch(getLoginAction);
+                                    },
                                     title: item[i]['title'].toString(),
                                   ),
                                 ),

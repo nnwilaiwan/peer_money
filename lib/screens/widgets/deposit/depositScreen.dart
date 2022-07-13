@@ -27,6 +27,7 @@ class DepositScreen extends StatefulWidget {
 
 class _DepositScreenState extends State<DepositScreen> {
   final depositAddress = TextEditingController();
+  String? _selectedValue;
 
   GlobalKey _globalKey = GlobalKey();
 
@@ -76,16 +77,20 @@ class _DepositScreenState extends State<DepositScreen> {
       card.add(InkWell(
         onTap: () {},
         child: Container(
-            height: 60,
-            color: Colors.white,
+            alignment: Alignment.center,
+            height: 90,
+            // color: Colors.red,
+            margin: const EdgeInsets.only(left: 10, right: 10),
             child: Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.all(10),
+                  // margin: const EdgeInsets.all(10),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             flex: 1,
@@ -93,7 +98,7 @@ class _DepositScreenState extends State<DepositScreen> {
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
                                       item[i]['address'].toString(),
@@ -110,6 +115,39 @@ class _DepositScreenState extends State<DepositScreen> {
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
                                           color: Color(0xFFA6B1C6)),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Container(
+                                      width: 74,
+                                      height: 28,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: item[i]['status'].toString() ==
+                                                'Pending'
+                                            ? const Color(0xFFFFF8DD)
+                                            : item[i]['status'].toString() ==
+                                                    'Completed'
+                                                ? const Color(0xFFE6FFF0)
+                                                : const Color(0xFFFFDFDD),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(5.0) //
+                                            ),
+                                      ),
+                                      child: Text(
+                                        item[i]['status'].toString(),
+                                        style: TextStyle(
+                                          fontFamily: AppTextSetting.APP_FONT,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          color: item[i]['status'].toString() ==
+                                                  'Pending'
+                                              ? const Color(0xFFF2A21E)
+                                              : item[i]['status'].toString() ==
+                                                      'Completed'
+                                                  ? const Color(0xFF34A156)
+                                                  : const Color(0xFFD82730),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -141,6 +179,10 @@ class _DepositScreenState extends State<DepositScreen> {
                     ],
                   ),
                 ),
+                const Divider(
+                  thickness: 1,
+                  color: Color(0xFFF5F5F5),
+                )
               ],
             )),
       ));
@@ -174,12 +216,53 @@ class _DepositScreenState extends State<DepositScreen> {
           Container(
             // height: MediaQuery.of(context).size.height,
             height: 400,
+            width: widthScreen,
             child: TabBarView(
               children: [
                 SingleChildScrollView(
                   child: Column(
-                    children: listDepositAll(context, heightScreen, widthScreen,
-                        AppTextSetting.DEPOSIT_LIST),
+                    children: [
+                      Container(
+                        width: widthScreen,
+                        height: 45,
+                        color: Color(0xFFF5F5F5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              width: 150,
+                              child: const Text(
+                                'TxID',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color(0xFF767676),
+                                    fontFamily: AppTextSetting.APP_FONT,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              width: 150,
+                              child: const Text(
+                                'Amount',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color(0xFF767676),
+                                    fontFamily: AppTextSetting.APP_FONT,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Column(
+                        children: listDepositAll(context, heightScreen,
+                            widthScreen, AppTextSetting.DEPOSIT_LIST),
+                      ),
+                    ],
                   ),
                 ),
                 const Text("Deposit"),
@@ -372,6 +455,73 @@ class _DepositScreenState extends State<DepositScreen> {
     );
   }
 
+  Container dropdownNetwork(double widthScreen, double heightScreen) {
+    return Container(
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4.0),
+          border: Border.all(width: 1, color: Colors.grey),
+          color: Colors.white),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          icon: const Icon(Icons.arrow_drop_down, color: Colors.grey),
+          items: [
+            for (var item in AppTextSetting.SELECT_NETWORK) item,
+          ].map<DropdownMenuItem<String>>((item) {
+            return DropdownMenuItem<String>(
+              value: item['id'].toString(),
+              child: Container(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: widthScreen * 0.8,
+                            height: widthScreen * 0.08,
+                            padding: const EdgeInsets.all(2),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Center(
+                                child: Text(item['name'],
+                                    style: TextStyle(
+                                        color: Colors.grey.shade700,
+                                        fontSize: 16,
+                                        fontFamily: AppTextSetting.APP_FONT,
+                                        fontWeight: FontWeight.w700)),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              _selectedValue = value! as String?;
+            });
+            print('----- value ------');
+            print(_selectedValue);
+          },
+          hint: const Text(
+            "Select Network",
+            style: TextStyle(
+              fontFamily: AppTextSetting.APP_FONT,
+              color: Colors.grey,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          value: _selectedValue,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double heightScreen = MediaQuery.of(context).size.height;
@@ -383,6 +533,11 @@ class _DepositScreenState extends State<DepositScreen> {
             appBar: AppBar(
               title: Text('Deposit ${widget.title.toString()}'),
               backgroundColor: AppTextSetting.COLOR_PRIMARY,
+              actions: [
+                IconButton(
+                    onPressed: () {},
+                    icon: Image.asset('assets/icons/icon-clock.png'))
+              ],
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -393,6 +548,17 @@ class _DepositScreenState extends State<DepositScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const Text(
+                          'Select Network',
+                          style: TextStyle(
+                            fontFamily: AppTextSetting.APP_FONT,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        dropdownNetwork(widthScreen, heightScreen),
+                        const SizedBox(height: 10),
                         const Text(
                           'Deposit Address',
                           style: TextStyle(
@@ -552,70 +718,13 @@ class _DepositScreenState extends State<DepositScreen> {
                             fontSize: 14,
                           ),
                         ),
-                        /*Container(
-                          alignment: Alignment.center,
-                          width: 200,
-                          height: 200,
-                          child: RepaintBoundary(
-                            key: _globalKey,
-                            child: QrImage(
-                              // key: _globalKey,
-                              data: depositAddress.text,
-                              version: QrVersions.auto,
-                              size: 200,
-                            ),
-                          ),
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                _saveScreen();
-                                // Navigator.of(context).pop();
-                              },
-                              child: Container(
-                                width: 162,
-                                height: 38,
-                                margin: const EdgeInsets.only(bottom: 20),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(
-                                    color: AppTextSetting.COLOR_PRIMARY,
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Container(
-                                  width: 185,
-                                  height: 45,
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: const Text(
-                                    'Download',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: AppTextSetting.COLOR_PRIMARY,
-                                        fontFamily: AppTextSetting.APP_FONT,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),*/
-                        Container(
-                          height: 500,
-                          child: SingleChildScrollView(
-                            child:
-                                _tabSection(context, heightScreen, widthScreen),
-                          ),
-                        ),
-                        // Column(children: [
-                        //   _tabSection(context,heightScreen,widthScreen)
-                        // ],)
                       ],
+                    ),
+                  ),
+                  Container(
+                    height: 500,
+                    child: SingleChildScrollView(
+                      child: _tabSection(context, heightScreen, widthScreen),
                     ),
                   ),
                 ],
