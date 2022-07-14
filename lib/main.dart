@@ -13,6 +13,8 @@ import 'package:peer_money/screens/homeScreen/homeScreenDetail.dart';
 import 'package:peer_money/screens/widgets/deposit/depositScreen.dart';
 import 'package:peer_money/screens/widgets/withdraw/withdrawScreen.dart';
 import 'package:peer_money/testCode/pieChart.dart';
+import 'package:peer_money/testCode/sendOTPScreen.dart';
+import 'package:peer_money/testCode/testConnectApi.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -54,17 +56,28 @@ class MyApp extends StatelessWidget {
             });
           },
           DepositScreen.id: (context) {
-            return DepositScreen(onInit: () {
-              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
-            },title: null,);
+            return DepositScreen(
+              onInit: () {
+                StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+              },
+              title: null,
+            );
           },
-             WithdrawScreen.id: (context) {
-            return WithdrawScreen(onInit: () {
-              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
-            },title: null,);
+          WithdrawScreen.id: (context) {
+            return WithdrawScreen(
+              onInit: () {
+                StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+              },
+              title: null,
+            );
           },
           PieChartTest.id: (context) {
             return PieChartTest(onInit: () {
+              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+            });
+          },
+          TestConnectApi.id: (context) {
+            return TestConnectApi(onInit: () {
               StoreProvider.of<AppState>(context).dispatch(getLoginAction);
             });
           },

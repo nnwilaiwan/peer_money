@@ -144,7 +144,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
+                                Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => WithdrawScreen(

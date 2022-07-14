@@ -65,10 +65,7 @@ class _DepositScreenState extends State<DepositScreen> {
     Fluttertoast.showToast(msg: info, toastLength: Toast.LENGTH_LONG);
   }
 
-  void initState() {
-    depositAddress.text = 'Oxa335xerwerwjk4w2342432D52qWERz56';
-    super.initState();
-  }
+ 
 
   List<Widget> listDepositAll(BuildContext context, double heightScreen,
       double widthScreen, dynamic item) {
@@ -520,6 +517,11 @@ class _DepositScreenState extends State<DepositScreen> {
         ),
       ),
     );
+  }
+   @override
+  void initState() {
+    depositAddress.text = 'Oxa335xerwerwjk4w2342432D52qWERz56';
+    super.initState();
   }
 
   @override

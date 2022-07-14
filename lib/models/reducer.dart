@@ -4,20 +4,7 @@ import 'package:peer_money/models/getAction.dart';
 AppState appReducer(state, action) {
   return AppState(
     //login
-    username: loginReducerUsername(state.username, action),
-    password: loginReducerPassword(state.password, action),
-    userID: loginReducerUserID(state.userID, action),
-    role: loginReducerRole(state.role, action),
-    employeetype: loginReducerEmployeetype(state.employeetype, action),
-    employeeid: loginReducerEmployeeid(state.employeeid, action),
-    employeename: loginReducerEmployeename(state.employeename, action),
-    email: loginReducerEmail(state.email, action),
     token: loginReducerToken(state.token, action),
-    imei: loginReducerImei(state.imei, action),
-    branchId: loginReducerBranchId(state.branchId, action),
-    branchName: loginReducerBranchName(state.branchName, action),
-    companyId: loginReducerCompanyId(state.companyId, action),
-    companyName: loginReducerCompanyName(state.companyName, action),
   );
 }
 

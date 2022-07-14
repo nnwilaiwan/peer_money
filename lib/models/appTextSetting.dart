@@ -110,4 +110,9 @@ class AppTextSetting {
       "name": "Arbitrum One",
     },
   ];
+
+  static String? OTP;
+  static String? OTP_ENCRYPT;
+  static String? REFERENCE_KRY;
+    static String? PHONE_NUMBER;
 }

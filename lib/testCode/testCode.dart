@@ -121,6 +121,8 @@ class _TermsAndConditionsPageState extends State<TermsAndConditionsPage> {
                 ],
               ),
             ),
+            Text(AppTextSetting.OTP.toString()),
+            Text(AppTextSetting.REFERENCE_KRY.toString()),
             ButtonNext(context),
           ],
         ),
