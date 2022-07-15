@@ -17,19 +17,18 @@ class SendOTPController {
     };
     var request =
         http.Request('POST', Uri.parse('${UrlApi.IP_ADDRESS}v1/otp/verify'));
-    request.body = json.encode({
-      "phone_number": phoneNumber,
-      "reference": reference,
-      "otp": otp
-    });
+    request.body = json.encode(
+        {"phone_number": phoneNumber, "reference": reference, "otp": otp});
     request.headers.addAll(headers);
     http.Response res = await http.Response.fromStream(await request.send());
 
     var result = jsonDecode(res.body);
     if (res.statusCode == 200) {
-      // var result = jsonDecode(res.body);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       list = result;
       var token = list['data']['otp_token'];
+      await prefs.setString("token", list['data']['otp_token']);
+
       print(token);
       print(list);
     } else {

@@ -11,6 +11,13 @@ import 'package:peer_money/screens/assets/assetsScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreenDetail.dart';
 import 'package:peer_money/screens/widgets/deposit/depositScreen.dart';
+import 'package:peer_money/screens/widgets/deposit/historyDetailScreen.dart';
+import 'package:peer_money/screens/widgets/deposit/transationsHistoryScreen.dart';
+import 'package:peer_money/screens/widgets/withdraw/confirmWithdraw.dart';
+import 'package:peer_money/screens/widgets/withdraw/historyWithdrawDetails.dart';
+import 'package:peer_money/screens/widgets/withdraw/verificationPinCode.dart';
+import 'package:peer_money/screens/widgets/withdraw/withdrawFailScreen.dart';
+import 'package:peer_money/screens/widgets/withdraw/withdrawProcessingScreen.dart';
 import 'package:peer_money/screens/widgets/withdraw/withdrawScreen.dart';
 import 'package:peer_money/testCode/pieChart.dart';
 import 'package:peer_money/testCode/sendOTPScreen.dart';
@@ -71,6 +78,41 @@ class MyApp extends StatelessWidget {
               title: null,
             );
           },
+          TransationsHistoryScreen.id: (context) {
+            return TransationsHistoryScreen(onInit: () {
+              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+            });
+          },
+          HistoryDetailScreen.id: (context) {
+            return HistoryDetailScreen(onInit: () {
+              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+            });
+          },
+          HistoryWithdrawDetailScreen.id: (context) {
+            return HistoryWithdrawDetailScreen(onInit: () {
+              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+            });
+          },
+          ConfirmWithdrawDetailScreen.id: (context) {
+            return ConfirmWithdrawDetailScreen(onInit: () {
+              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+            });
+          },
+          VerificationPincodeScreen.id: (context) {
+            return VerificationPincodeScreen(onInit: () {
+              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+            });
+          },
+          WithdrawProcessingScreen.id: (context) {
+            return WithdrawProcessingScreen(onInit: () {
+              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+            });
+          },
+          WithdrawFailScreen.id: (context) {
+            return WithdrawFailScreen(onInit: () {
+              StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+            });
+          },
           PieChartTest.id: (context) {
             return PieChartTest(onInit: () {
               StoreProvider.of<AppState>(context).dispatch(getLoginAction);
@@ -83,6 +125,9 @@ class MyApp extends StatelessWidget {
           },
         },
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Inter',
+        ),
         home: SplashPage(),
       ),
     );

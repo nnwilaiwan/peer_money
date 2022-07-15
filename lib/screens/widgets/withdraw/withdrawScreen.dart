@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:peer_money/models/appState.dart';
 import 'package:peer_money/models/appTextSetting.dart';
+import 'package:peer_money/models/getAction.dart';
+import 'package:peer_money/screens/widgets/deposit/transationsHistoryScreen.dart';
+import 'package:peer_money/screens/widgets/withdraw/confirmWithdraw.dart';
 
 class WithdrawScreen extends StatefulWidget {
   static const String id = "WithdrawScreen";
@@ -299,11 +302,29 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Withdraw ${widget.title.toString()}'),
+              title: Text(
+                'Withdraw ${widget.title.toString()}',
+                style: const TextStyle(
+                  fontFamily: AppTextSetting.APP_FONT,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
               backgroundColor: AppTextSetting.COLOR_PRIMARY,
               actions: [
-                 IconButton(
-                    onPressed: () {},
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TransationsHistoryScreen(
+                                  onInit: () {
+                                    StoreProvider.of<AppState>(context)
+                                        .dispatch(getLoginAction);
+                                  },
+                                )),
+                      );
+                    },
                     icon: Image.asset('assets/icons/icon-clock.png'))
               ],
             ),
@@ -620,7 +641,19 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                           ],
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ConfirmWithdrawDetailScreen(
+                                        onInit: () {
+                                          StoreProvider.of<AppState>(context)
+                                              .dispatch(getLoginAction);
+                                        },
+                                      )),
+                            );
+                          },
                           child: Container(
                             width: 145,
                             height: 38,

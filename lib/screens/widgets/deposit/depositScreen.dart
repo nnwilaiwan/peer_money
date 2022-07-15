@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:peer_money/models/appState.dart';
 import 'package:peer_money/models/appTextSetting.dart';
+import 'package:peer_money/models/getAction.dart';
+import 'package:peer_money/screens/widgets/deposit/transationsHistoryScreen.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -64,8 +66,6 @@ class _DepositScreenState extends State<DepositScreen> {
   _toastInfo(String info) {
     Fluttertoast.showToast(msg: info, toastLength: Toast.LENGTH_LONG);
   }
-
- 
 
   List<Widget> listDepositAll(BuildContext context, double heightScreen,
       double widthScreen, dynamic item) {
@@ -499,7 +499,7 @@ class _DepositScreenState extends State<DepositScreen> {
           }).toList(),
           onChanged: (value) {
             setState(() {
-              _selectedValue = value! as String?;
+              _selectedValue = value.toString();
             });
             print('----- value ------');
             print(_selectedValue);
@@ -518,7 +518,8 @@ class _DepositScreenState extends State<DepositScreen> {
       ),
     );
   }
-   @override
+
+  @override
   void initState() {
     depositAddress.text = 'Oxa335xerwerwjk4w2342432D52qWERz56';
     super.initState();
@@ -533,11 +534,29 @@ class _DepositScreenState extends State<DepositScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Deposit ${widget.title.toString()}'),
+              title: Text(
+                'Deposit ${widget.title.toString()}',
+                style: const TextStyle(
+                  fontFamily: AppTextSetting.APP_FONT,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
               backgroundColor: AppTextSetting.COLOR_PRIMARY,
               actions: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TransationsHistoryScreen(
+                                  onInit: () {
+                                    StoreProvider.of<AppState>(context)
+                                        .dispatch(getLoginAction);
+                                  },
+                                )),
+                      );
+                    },
                     icon: Image.asset('assets/icons/icon-clock.png'))
               ],
             ),
