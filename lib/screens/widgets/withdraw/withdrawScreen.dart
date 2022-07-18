@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:peer_money/models/appState.dart';
 import 'package:peer_money/models/appTextSetting.dart';
 import 'package:peer_money/models/getAction.dart';
+import 'package:peer_money/screens/navigations/navigationMenuBar.dart';
 import 'package:peer_money/screens/widgets/deposit/transationsHistoryScreen.dart';
 import 'package:peer_money/screens/widgets/withdraw/confirmWithdraw.dart';
 
@@ -19,7 +20,18 @@ class WithdrawScreen extends StatefulWidget {
 
 class _WithdrawScreenState extends State<WithdrawScreen> {
   final depositAddress = TextEditingController();
+  final amountTxt = TextEditingController();
+
   String? _selectedValue;
+
+  @override
+  void initState() {
+    depositAddress.text = 'Oxa335xerwerwjk4w2342432D52qWERz56';
+    amountTxt.text = '5.5';
+    super.initState();
+  }
+
+
 
   Container dropdownNetwork(double widthScreen, double heightScreen) {
     return Container(
@@ -328,121 +340,91 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                     icon: Image.asset('assets/icons/icon-clock.png'))
               ],
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(13),
+            body: Stack(
+              children: [
+                Container(
+                  // color: Colors.amber,
+                  height: 740,
+                  child: SingleChildScrollView(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Select Network',
-                          style: TextStyle(
-                            fontFamily: AppTextSetting.APP_FONT,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        dropdownNetwork(widthScreen, heightScreen),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'Wtihdraw to Address',
-                          style: TextStyle(
-                            fontFamily: AppTextSetting.APP_FONT,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
                         Container(
-                          height: 47,
-                          margin: const EdgeInsets.only(right: 8),
-                          child: TextField(
-                            controller: depositAddress,
-                            cursorColor: const Color(0xFFD6D6D6),
-                            decoration: const InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFD6D6D6),
-                                  ),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF767676),
-                                  ),
-                                ),
-                                suffixStyle: TextStyle(color: Colors.green)),
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          child: Row(
+                          margin: const EdgeInsets.all(13),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.asset('assets/icons/icon-important.png'),
-                              const SizedBox(width: 10),
                               const Text(
-                                'Important',
+                                'Select Network',
                                 style: TextStyle(
                                   fontFamily: AppTextSetting.APP_FONT,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 14,
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'Send to this address using the Ethereum Network (ERC-20)',
-                          style: TextStyle(
-                            fontFamily: AppTextSetting.APP_FONT,
-                            fontSize: 14,
-                            color: Color(0xFF767676),
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'Avaliable',
-                                    style: TextStyle(
-                                      fontFamily: AppTextSetting.APP_FONT,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  Text(
-                                    '5.5 ETH',
-                                    style: TextStyle(
-                                      fontFamily: AppTextSetting.APP_FONT,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              dropdownNetwork(widthScreen, heightScreen),
+                              const SizedBox(height: 10),
+                              const Text(
+                                'Wtihdraw to Address',
+                                style: TextStyle(
+                                  fontFamily: AppTextSetting.APP_FONT,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Container(
+                                height: 47,
+                                margin: const EdgeInsets.only(right: 8),
+                                child: TextField(
+                                  controller: depositAddress,
+                                  cursorColor: const Color(0xFFD6D6D6),
+                                  decoration: const InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFD6D6D6),
+                                        ),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF767676),
+                                        ),
+                                      ),
+                                      suffixStyle:
+                                          TextStyle(color: Colors.green)),
+                                ),
                               ),
                               const SizedBox(height: 15),
                               Container(
-                                // color: Colors.grey.shade300,
-                                padding: const EdgeInsets.all(15),
-                                height: 70,
-                                width: widthScreen,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFE5E5E5),
-                                  border: Border.all(
-                                    color: const Color(0xFFE5E5E5),
-                                  ),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(5.0)),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                        'assets/icons/icon-important.png'),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      'Important',
+                                      style: TextStyle(
+                                        fontFamily: AppTextSetting.APP_FONT,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14,
+                                      ),
+                                    )
+                                  ],
                                 ),
+                              ),
+                              const SizedBox(height: 10),
+                              const Text(
+                                'Send to this address using the Ethereum Network (ERC-20)',
+                                style: TextStyle(
+                                  fontFamily: AppTextSetting.APP_FONT,
+                                  fontSize: 14,
+                                  color: Color(0xFF767676),
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              Container(
+                                color: Colors.white,
                                 child: Column(
                                   children: [
                                     Row(
@@ -450,197 +432,253 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: const [
                                         Text(
-                                          'Total Asset',
+                                          'Avaliable',
                                           style: TextStyle(
-                                            color: Color(0xFF646464),
                                             fontFamily: AppTextSetting.APP_FONT,
+                                            fontWeight: FontWeight.w700,
                                             fontSize: 14,
-                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                         Text(
-                                          '7.5 ETH',
+                                          '5.5 ETH',
                                           style: TextStyle(
-                                            color: Colors.black,
                                             fontFamily: AppTextSetting.APP_FONT,
+                                            fontWeight: FontWeight.w700,
                                             fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        Text(
-                                          'Lock to Loan',
-                                          style: TextStyle(
-                                            color: Color(0xFF646464),
-                                            fontFamily: AppTextSetting.APP_FONT,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
-                                        Text(
-                                          ' 5 ETH',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: AppTextSetting.APP_FONT,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        )
                                       ],
                                     ),
+                                    const SizedBox(height: 15),
+                                    Container(
+                                      // color: Colors.grey.shade300,
+                                      padding: const EdgeInsets.all(15),
+                                      height: 70,
+                                      width: widthScreen,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFE5E5E5),
+                                        border: Border.all(
+                                          color: const Color(0xFFE5E5E5),
+                                        ),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(5.0)),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: const [
+                                              Text(
+                                                'Total Asset',
+                                                style: TextStyle(
+                                                  color: Color(0xFF646464),
+                                                  fontFamily:
+                                                      AppTextSetting.APP_FONT,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              Text(
+                                                '7.5 ETH',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily:
+                                                      AppTextSetting.APP_FONT,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: const [
+                                              Text(
+                                                'Lock to Loan',
+                                                style: TextStyle(
+                                                  color: Color(0xFF646464),
+                                                  fontFamily:
+                                                      AppTextSetting.APP_FONT,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              Text(
+                                                ' 5 ETH',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily:
+                                                      AppTextSetting.APP_FONT,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    )
                                   ],
                                 ),
-                              )
+                              ),
+                              const SizedBox(height: 20),
+                              const Text(
+                                'Amount',
+                                style: TextStyle(
+                                  fontFamily: AppTextSetting.APP_FONT,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Container(
+                                height: 47,
+                                margin: const EdgeInsets.only(right: 8),
+                                child: TextField(
+                                  controller: amountTxt,
+                                  cursorColor: const Color(0xFFD6D6D6),
+                                  decoration: const InputDecoration(
+                                      hintText: '0.0',
+                                      suffixText: 'ETH MAX',
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFD6D6D6),
+                                        ),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF767676),
+                                        ),
+                                      ),
+                                      suffixStyle: TextStyle(
+                                          color: AppTextSetting.COLOR_PRIMARY)),
+                                ),
+                              ),
+                              const SizedBox(height: 30),
+                              const Text(
+                                'Tips',
+                                style: TextStyle(
+                                  fontFamily: AppTextSetting.APP_FONT,
+                                  fontSize: 14,
+                                  color: Color(0xFFA4A4A4),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.circle,
+                                          size: 7,
+                                          color: Color(0xFFA4A4A4),
+                                        ),
+                                        Text(
+                                          '  24hr Withdrawal Limit : 10 ETH  per Day',
+                                          style: TextStyle(
+                                            fontFamily: AppTextSetting.APP_FONT,
+                                            fontSize: 14,
+                                            color: Color(0xFFA4A4A4),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: const [
+                                        Icon(
+                                          Icons.circle,
+                                          size: 7,
+                                          color: Color(0xFFA4A4A4),
+                                        ),
+                                        Text(
+                                          '  We will not credit your account with tokens from \nthat sale.',
+                                          style: TextStyle(
+                                            fontFamily: AppTextSetting.APP_FONT,
+                                            fontSize: 14,
+                                            color: Color(0xFFA4A4A4),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              const Text(
+                                'Transations',
+                                style: TextStyle(
+                                  fontFamily: AppTextSetting.APP_FONT,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const Divider(color: Colors.grey),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        const Text(
-                          'Amount',
-                          style: TextStyle(
-                            fontFamily: AppTextSetting.APP_FONT,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
                         Container(
-                          height: 47,
-                          margin: const EdgeInsets.only(right: 8),
-                          child: TextField(
-                            controller: depositAddress,
-                            cursorColor: const Color(0xFFD6D6D6),
-                            decoration: const InputDecoration(
-                                hintText: '0.0',
-                                suffixText: 'ETH MAX',
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFD6D6D6),
-                                  ),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF767676),
-                                  ),
-                                ),
-                                suffixStyle: TextStyle(color: Colors.green)),
+                          height: 450,
+                          child: SingleChildScrollView(
+                            child:
+                                _tabSection(context, heightScreen, widthScreen),
                           ),
                         ),
-                        const SizedBox(height: 30),
-                        const Text(
-                          'Tips',
-                          style: TextStyle(
-                            fontFamily: AppTextSetting.APP_FONT,
-                            fontSize: 14,
-                            color: Color(0xFFA4A4A4),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(left: 10),
-                              child: Row(
-                                children: const [
-                                  Icon(
-                                    Icons.circle,
-                                    size: 7,
-                                    color: Color(0xFFA4A4A4),
-                                  ),
-                                  Text(
-                                    '  24hr Withdrawal Limit : 10 ETH  per Day',
-                                    style: TextStyle(
-                                      fontFamily: AppTextSetting.APP_FONT,
-                                      fontSize: 14,
-                                      color: Color(0xFFA4A4A4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 10),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Icon(
-                                    Icons.circle,
-                                    size: 7,
-                                    color: Color(0xFFA4A4A4),
-                                  ),
-                                  Text(
-                                    '  We will not credit your account with tokens from \nthat sale.',
-                                    style: TextStyle(
-                                      fontFamily: AppTextSetting.APP_FONT,
-                                      fontSize: 14,
-                                      color: Color(0xFFA4A4A4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        const Text(
-                          'Transations',
-                          style: TextStyle(
-                            fontFamily: AppTextSetting.APP_FONT,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const Divider(color: Colors.grey),
+                        const SizedBox(height: 10)
                       ],
                     ),
                   ),
-                  Container(
-                    height: 450,
-                    child: SingleChildScrollView(
-                      child: _tabSection(context, heightScreen, widthScreen),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 20, right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'Receive amount',
-                              style: TextStyle(
-                                  color: Color(0xFF000000),
-                                  fontFamily: AppTextSetting.APP_FONT,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              '5.5 ETH',
-                              style: TextStyle(
-                                  color: Color(0xFF000000),
-                                  fontFamily: AppTextSetting.APP_FONT,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              'network fee 0.00 ETH',
-                              style: TextStyle(
-                                  color: Color(0xFF9C9C9C),
-                                  fontFamily: AppTextSetting.APP_FONT,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                        InkWell(
+                ),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  // color: Colors.amber,
+                  margin:
+                      const EdgeInsets.only(left: 20, right: 20,bottom: 50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            'Receive amount',
+                            style: TextStyle(
+                                color: Color(0xFF000000),
+                                fontFamily: AppTextSetting.APP_FONT,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            '5.5 ETH',
+                            style: TextStyle(
+                                color: Color(0xFF000000),
+                                fontFamily: AppTextSetting.APP_FONT,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            'network fee 0.00 ETH',
+                            style: TextStyle(
+                                color: Color(0xFF9C9C9C),
+                                fontFamily: AppTextSetting.APP_FONT,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: InkWell(
                           onTap: () {
                             Navigator.push(
                               context,
@@ -679,12 +717,11 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 10)
-                ],
-              ),
+                ),
+              ],
             ),
           );
         });

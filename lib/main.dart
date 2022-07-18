@@ -10,6 +10,7 @@ import 'package:peer_money/models/reducer.dart';
 import 'package:peer_money/screens/assets/assetsScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreenDetail.dart';
+import 'package:peer_money/screens/widgets/deposit/depdsitDialog.dart';
 import 'package:peer_money/screens/widgets/deposit/depositScreen.dart';
 import 'package:peer_money/screens/widgets/deposit/historyDetailScreen.dart';
 import 'package:peer_money/screens/widgets/deposit/transationsHistoryScreen.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
                 StoreProvider.of<AppState>(context).dispatch(getLoginAction);
               },
               title: null,
+              valueNetwork: null,
             );
           },
           WithdrawScreen.id: (context) {
@@ -112,6 +114,14 @@ class MyApp extends StatelessWidget {
             return WithdrawFailScreen(onInit: () {
               StoreProvider.of<AppState>(context).dispatch(getLoginAction);
             });
+          },
+          DepositDialogScreen.id: (context) {
+            return  DepositDialogScreen(
+              onInit: () {
+                StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+              },
+              title: null,
+            );
           },
           PieChartTest.id: (context) {
             return PieChartTest(onInit: () {
@@ -282,4 +292,285 @@ class _HomeState extends State<Home> {
   } 
 }*/
 
+/*import 'package:flutter/material.dart';
+import 'package:peer_money/models/appTextSetting.dart';
+import 'package:peer_money/testCode/testCardVerify.dart';
 
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Checkbox Dialog Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Checkbox Dialog Demo'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  bool checkboxValueCity = false;
+  List<String> allCities = ['Alpha', 'Beta', 'Gamma'];
+  List<String> selectedCities = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return _MyDialog();
+                });
+          }),
+    );
+  }
+}
+
+class _MyDialog extends StatefulWidget {
+  @override
+  _MyDialogState createState() => _MyDialogState();
+}
+
+class _MyDialogState extends State<_MyDialog> {
+  // List<String> _tempSelectedCities = [];
+  Color bgETH = const Color(0xFFF4F3F6);
+  Color bgBNB = const Color(0xFFF4F3F6);
+  Color bgArbitrum = const Color(0xFFF4F3F6);
+  Color fontArbitrum = Colors.black;
+  Color fontETH = Colors.black;
+  Color fontBNB = Colors.black;
+  String imageETH = 'assets/icons/icon-round.png';
+  String imageBNB = 'assets/icons/icon-round.png';
+  String imageArbitrum = 'assets/icons/icon-round.png';
+
+  @override
+  void initState() {
+    // _tempSelectedCities = widget.selectedCities;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+    return Dialog(
+      child: Container(
+        width: widthScreen,
+        height: 350,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(40),
+            topLeft: Radius.circular(40),
+          ),
+        ),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // const SizedBox(width: 50),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: const Text(
+                        'Select Network',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Expanded(
+                      flex: 1,
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: Container(
+                            // color: Colors.green,
+                            margin: const EdgeInsets.only(right: 20),
+                            //
+                            width: 20,
+                            height: 20,
+                            child: Image.asset('assets/icons/icon-close.png')),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  bgETH == const Color(0xFFF4F3F6)
+                      ? bgETH = AppTextSetting.COLOR_PRIMARY
+                      : bgETH = const Color(0xFFF4F3F6);
+
+                  fontETH == Colors.white
+                      ? fontETH = Colors.black
+                      : fontETH = Colors.white;
+                  imageETH == 'assets/icons/icon-round.png'
+                      ? imageETH = 'assets/icons/icon-check-round.png'
+                      : imageETH = 'assets/icons/icon-round.png';
+                });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TestVerifyCard(),
+                  ),
+                );
+                Navigator.of(context);
+
+                print('Ethereum (ERC20)');
+              },
+              child: Container(
+                margin: const EdgeInsets.only(left: 10, right: 10),
+                width: widthScreen,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: bgETH,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 15),
+                      child: Image.asset(imageETH),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      'Ethereum (ERC20)',
+                      style: TextStyle(
+                        fontFamily: AppTextSetting.APP_FONT,
+                        fontSize: 16,
+                        color: fontETH,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  bgBNB == const Color(0xFFF4F3F6)
+                      ? bgBNB = AppTextSetting.COLOR_PRIMARY
+                      : bgBNB = const Color(0xFFF4F3F6);
+
+                  fontBNB == Colors.white
+                      ? fontBNB = Colors.black
+                      : fontBNB = Colors.white;
+                  imageBNB == 'assets/icons/icon-round.png'
+                      ? imageBNB = 'assets/icons/icon-check-round.png'
+                      : imageBNB = 'assets/icons/icon-round.png';
+                });
+                print('BNB Smart Chain (BEP20)');
+              },
+              child: Container(
+                margin: const EdgeInsets.only(left: 10, right: 10),
+                width: widthScreen,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: bgBNB,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(left: 15),
+                        child: Image.asset(imageBNB)),
+                    const SizedBox(width: 20),
+                    Text(
+                      'BNB Smart Chain (BEP20)',
+                      style: TextStyle(
+                        fontFamily: AppTextSetting.APP_FONT,
+                        fontSize: 16,
+                        color: fontBNB,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  bgArbitrum == const Color(0xFFF4F3F6)
+                      ? bgArbitrum = AppTextSetting.COLOR_PRIMARY
+                      : bgArbitrum = const Color(0xFFF4F3F6);
+
+                  fontArbitrum == Colors.white
+                      ? fontArbitrum = Colors.black
+                      : fontArbitrum = Colors.white;
+                  imageArbitrum == 'assets/icons/icon-round.png'
+                      ? imageArbitrum = 'assets/icons/icon-check-round.png'
+                      : imageArbitrum = 'assets/icons/icon-round.png';
+
+                  // BNB = false;
+                  // Arbitrum = true;
+                });
+                print('Arbitrum One');
+              },
+              child: Container(
+                margin: const EdgeInsets.only(left: 10, right: 10),
+                width: widthScreen,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: bgArbitrum,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 15),
+                      child: Image.asset(imageArbitrum),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      'Arbitrum One',
+                      style: TextStyle(
+                        fontFamily: AppTextSetting.APP_FONT,
+                        fontSize: 16,
+                        color: fontArbitrum,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}*/

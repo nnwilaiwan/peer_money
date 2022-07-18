@@ -9,7 +9,13 @@ AppState appReducer(state, action) {
 }
 
 //Login
-loginReducerUsername(username, action) {
+
+loginReducerToken(token, action) {
+  if (action is GetAction) {
+    return action.token;
+  }
+}
+/*loginReducerUsername(username, action) {
   if (action is GetAction) {
     return action.username;
   }
@@ -57,11 +63,6 @@ loginReducerEmail(email, action) {
   }
 }
 
-loginReducerToken(token, action) {
-  if (action is GetAction) {
-    return action.token;
-  }
-}
 
 loginReducerImei(imei, action) {
   if (action is GetAction) {
@@ -91,4 +92,4 @@ loginReducerCompanyName(companyName, action) {
   if (action is GetAction) {
     return action.companyName;
   }
-}
+}*/

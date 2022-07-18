@@ -9,9 +9,11 @@ class TestVerifyCard extends StatefulWidget {
 class _TestVerifyCardState extends State<TestVerifyCard> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        margin: const EdgeInsets.only(left: 10, right: 10, top: 15),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(title: const Text('Test'),),
+      body: Container(
+        margin: const EdgeInsets.only(left: 10, right: 10, top: 50),
         child: Column(
           children: [
             Container(

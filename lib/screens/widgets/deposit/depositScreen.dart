@@ -1,6 +1,4 @@
-import 'dart:typed_data';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -12,16 +10,21 @@ import 'package:peer_money/screens/widgets/deposit/transationsHistoryScreen.dart
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:ui' as ui;
 
 class DepositScreen extends StatefulWidget {
   static const String id = "DepositScreen";
-  final void Function() onInit;
+  final void Function()? onInit;
   final String? title;
-  const DepositScreen({Key? key, required this.onInit, required this.title})
-      : super(key: key);
+  final String? valueNetwork;
+
+  const DepositScreen({
+    Key? key,
+     this.onInit,
+    required this.title,
+    required this.valueNetwork,
+  }) : super(key: key);
 
   @override
   State<DepositScreen> createState() => _DepositScreenState();
@@ -522,6 +525,7 @@ class _DepositScreenState extends State<DepositScreen> {
   @override
   void initState() {
     depositAddress.text = 'Oxa335xerwerwjk4w2342432D52qWERz56';
+    _selectedValue = widget.valueNetwork;
     super.initState();
   }
 
@@ -532,226 +536,223 @@ class _DepositScreenState extends State<DepositScreen> {
     return StoreConnector<AppState, AppState>(
         converter: (store) => store.state,
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                'Deposit ${widget.title.toString()}',
-                style: const TextStyle(
-                  fontFamily: AppTextSetting.APP_FONT,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              backgroundColor: AppTextSetting.COLOR_PRIMARY,
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TransationsHistoryScreen(
-                                  onInit: () {
-                                    StoreProvider.of<AppState>(context)
-                                        .dispatch(getLoginAction);
-                                  },
-                                )),
-                      );
-                    },
-                    icon: Image.asset('assets/icons/icon-clock.png'))
-              ],
-            ),
-            body: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Deposit ${widget.title.toString()}',
+          style: const TextStyle(
+            fontFamily: AppTextSetting.APP_FONT,
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        backgroundColor: AppTextSetting.COLOR_PRIMARY,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TransationsHistoryScreen(
+                            onInit: () {
+                              StoreProvider.of<AppState>(context)
+                                  .dispatch(getLoginAction);
+                            },
+                          )),
+                );
+              },
+              icon: Image.asset('assets/icons/icon-clock.png'))
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(13),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.all(13),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Select Network',
-                          style: TextStyle(
-                            fontFamily: AppTextSetting.APP_FONT,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
+                  const Text(
+                    'Select Network',
+                    style: TextStyle(
+                      fontFamily: AppTextSetting.APP_FONT,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  dropdownNetwork(widthScreen, heightScreen),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Deposit Address',
+                    style: TextStyle(
+                      fontFamily: AppTextSetting.APP_FONT,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: depositAddress,
+                    cursorColor: const Color(0xFFD6D6D6),
+                    decoration: const InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFFD6D6D6),
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        dropdownNetwork(widthScreen, heightScreen),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'Deposit Address',
-                          style: TextStyle(
-                            fontFamily: AppTextSetting.APP_FONT,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFFD6D6D6),
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        TextField(
-                          controller: depositAddress,
-                          cursorColor: const Color(0xFFD6D6D6),
-                          decoration: const InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFD6D6D6),
-                                ),
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0xFFD6D6D6),
-                                ),
-                              ),
-                              suffixStyle: TextStyle(color: Colors.green)),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                print('view qr');
-                                _showMyDialog(widthScreen, heightScreen);
-                              },
-                              child: Container(
-                                width: 162,
-                                height: 38,
-                                decoration: BoxDecoration(
-                                  color: AppTextSetting.COLOR_PRIMARY,
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 2.0),
-                                      child: Image.asset(
-                                          'assets/icons/icon-oqcode.png'),
-                                    ),
-                                    const Padding(
-                                      padding: EdgeInsets.only(right: 5.0),
-                                      child: Text(
-                                        'View QR',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: AppTextSetting.APP_FONT,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                        suffixStyle: TextStyle(color: Colors.green)),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          print('view qr');
+                          _showMyDialog(widthScreen, heightScreen);
+                        },
+                        child: Container(
+                          width: 162,
+                          height: 38,
+                          decoration: BoxDecoration(
+                            color: AppTextSetting.COLOR_PRIMARY,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 1,
                             ),
-                            InkWell(
-                              onTap: () {
-                                // _showMyDialogCopy(widthScreen, heightScreen);
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Destination Address Copied to Clipboard",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.TOP,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: const Color(0xFF424242),
-                                    textColor: Colors.white,
-                                    fontSize: 13.0);
-                                Clipboard.setData(
-                                    ClipboardData(text: depositAddress.text));
-                                print('copy $depositAddress');
-                              },
-                              child: Container(
-                                width: 162,
-                                height: 38,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(
-                                    color: AppTextSetting.COLOR_PRIMARY,
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 2.0),
-                                      child: Image.asset(
-                                          'assets/icons/icon-copy.png'),
-                                    ),
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Copy',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: AppTextSetting.COLOR_PRIMARY,
-                                            fontFamily: AppTextSetting.APP_FONT,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Container(
+                          ),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset('assets/icons/icon-important.png'),
-                              const SizedBox(width: 10),
-                              const Text(
-                                'Important',
-                                style: TextStyle(
-                                  fontFamily: AppTextSetting.APP_FONT,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
+                              Padding(
+                                padding: const EdgeInsets.only(right: 2.0),
+                                child:
+                                    Image.asset('assets/icons/icon-oqcode.png'),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(right: 5.0),
+                                child: Text(
+                                  'View QR',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: AppTextSetting.APP_FONT,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'Send to this address using the Ethereum Network (ERC-20)',
-                          style: TextStyle(
-                            fontFamily: AppTextSetting.APP_FONT,
-                            fontSize: 14,
-                            color: Color(0xFF767676),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          // _showMyDialogCopy(widthScreen, heightScreen);
+                          Fluttertoast.showToast(
+                              msg: "Destination Address Copied to Clipboard",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.TOP,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: const Color(0xFF424242),
+                              textColor: Colors.white,
+                              fontSize: 13.0);
+                          Clipboard.setData(
+                              ClipboardData(text: depositAddress.text));
+                          print('copy $depositAddress');
+                        },
+                        child: Container(
+                          width: 162,
+                          height: 38,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: AppTextSetting.COLOR_PRIMARY,
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 2.0),
+                                child:
+                                    Image.asset('assets/icons/icon-copy.png'),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Copy',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: AppTextSetting.COLOR_PRIMARY,
+                                      fontFamily: AppTextSetting.APP_FONT,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 30),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    child: Row(
+                      children: [
+                        Image.asset('assets/icons/icon-important.png'),
+                        const SizedBox(width: 10),
                         const Text(
-                          'Transations',
+                          'Important',
                           style: TextStyle(
                             fontFamily: AppTextSetting.APP_FONT,
                             fontWeight: FontWeight.w700,
                             fontSize: 14,
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
-                  Container(
-                    height: 500,
-                    child: SingleChildScrollView(
-                      child: _tabSection(context, heightScreen, widthScreen),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Send to this address using the Ethereum Network (ERC-20)',
+                    style: TextStyle(
+                      fontFamily: AppTextSetting.APP_FONT,
+                      fontSize: 14,
+                      color: Color(0xFF767676),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  const Text(
+                    'Transations',
+                    style: TextStyle(
+                      fontFamily: AppTextSetting.APP_FONT,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
                     ),
                   ),
                 ],
               ),
             ),
-          );
-        });
+            Container(
+              height: 500,
+              child: SingleChildScrollView(
+                child: _tabSection(context, heightScreen, widthScreen),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    });
   }
 }
