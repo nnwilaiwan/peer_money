@@ -13,7 +13,12 @@ class HistoryDetailScreen extends StatefulWidget {
   final void Function() onInit;
 
   const HistoryDetailScreen(
-      {Key? key, required this.onInit, this.value, this.status, this.address,this.date})
+      {Key? key,
+      required this.onInit,
+      this.value,
+      this.status,
+      this.address,
+      this.date})
       : super(key: key);
 
   @override
@@ -35,6 +40,7 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: const Text('Deposit Details'),
               backgroundColor: AppTextSetting.COLOR_PRIMARY,
             ),
@@ -127,7 +133,7 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                                   color: Color(0xFF767676)),
                             ),
                             Text(
-                              'Ethereum (ERC20)2',
+                              'Ethereum (ERC20)',
                               style: TextStyle(
                                   fontFamily: AppTextSetting.APP_FONT,
                                   fontSize: 14,
@@ -152,7 +158,7 @@ class _HistoryDetailScreenState extends State<HistoryDetailScreen> {
                               // mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 const Text(
-                                  '0xcbf53666ddd2361ad1 tgtvdd556sEthereum (ERC20)2',
+                                  '0xcbf53666ddd2361ad1 tgtvdd556s',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                       fontFamily: AppTextSetting.APP_FONT,

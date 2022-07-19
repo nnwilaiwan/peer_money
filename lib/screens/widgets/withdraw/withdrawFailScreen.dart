@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:peer_money/models/appState.dart';
 import 'package:peer_money/models/appTextSetting.dart';
+import 'package:peer_money/models/getAction.dart';
+import 'package:peer_money/screens/widgets/deposit/transationsHistoryScreen.dart';
 
 class WithdrawFailScreen extends StatefulWidget {
   static const String id = "WithdrawFailScreen";
@@ -28,6 +30,7 @@ class _WithdrawFailScreenState extends State<WithdrawFailScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               automaticallyImplyLeading: false,
               title: const Text(
                 'Withdraw Fail',
@@ -133,7 +136,17 @@ class _WithdrawFailScreenState extends State<WithdrawFailScreen> {
                   alignment: Alignment.bottomCenter,
                   child: InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TransationsHistoryScreen(
+                                  onInit: () {
+                                    StoreProvider.of<AppState>(context)
+                                        .dispatch(getLoginAction);
+                                  },
+                                )),
+                      );
+                      // Navigator.pop(context);
                     },
                     child: Container(
                       width: 343,

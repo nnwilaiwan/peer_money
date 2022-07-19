@@ -33,6 +33,7 @@ class _ConfirmWithdrawDetailScreenState
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: const Text(
                 'Confirm Withdraw',
                 style: TextStyle(
@@ -47,7 +48,6 @@ class _ConfirmWithdrawDetailScreenState
               children: [
                 Center(
                   child: Container(
-                  
                     child: Column(
                       children: [
                         Container(
@@ -84,7 +84,8 @@ class _ConfirmWithdrawDetailScreenState
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: const [
                                   Text(
                                     'Withdraw to Address',
@@ -95,7 +96,7 @@ class _ConfirmWithdrawDetailScreenState
                                         color: Color(0xFF767676)),
                                   ),
                                   Text(
-                                    '0xcbf53666ddd2361ad1 tgtvdd556sEthereum (ERC20)2',
+                                    '0xcbf53666ddd2361ad1 tgtvdd556s',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
                                         fontFamily: AppTextSetting.APP_FONT,
@@ -107,7 +108,8 @@ class _ConfirmWithdrawDetailScreenState
                               ),
                               const SizedBox(height: 25),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: const [
                                   Text(
                                     'Network',
@@ -129,7 +131,8 @@ class _ConfirmWithdrawDetailScreenState
                               ),
                               const SizedBox(height: 25),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: const [
                                   Text(
                                     'Network fee',

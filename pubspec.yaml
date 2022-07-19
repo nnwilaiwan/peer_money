@@ -57,7 +57,8 @@ dependencies:
   sizer: ^2.0.15
   dots_indicator: ^2.1.0
   pin_code_fields: ^7.4.0
-
+  encrypt: ^5.0.1
+  encryptor: ^0.0.1
 
 dev_dependencies:
   flutter_test:

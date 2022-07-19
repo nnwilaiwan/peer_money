@@ -865,7 +865,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                                   });*/
                             },
                             child: Container(
-                              width: 180,
+                              width: widthScreen *0.44,
                               height: 38,
                               decoration: BoxDecoration(
                                 color: AppTextSetting.COLOR_PRIMARY,
@@ -908,7 +908,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                               //     widthScreen, item[i]['title'].toString());
                             },
                             child: Container(
-                              width: 180,
+                              width: widthScreen *0.44,
                               height: 38,
                               decoration: BoxDecoration(
                                 color: Colors.white,

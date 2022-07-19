@@ -49,7 +49,7 @@ class _VerificationPincodeScreenState extends State<VerificationPincodeScreen> {
                     },
                   )),
         );
-         code = '';
+        code = '';
       }
     });
   }
@@ -85,6 +85,7 @@ class _VerificationPincodeScreenState extends State<VerificationPincodeScreen> {
           return Scaffold(
             // background/assets-for-api-docs/assets/material/Colors.blacks.pngColor: Colors.red,
             appBar: AppBar(
+              centerTitle: true,
               title: const Text(
                 'Verification',
                 style: TextStyle(

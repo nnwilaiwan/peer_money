@@ -729,7 +729,7 @@ class _TransationsHistoryScreenState extends State<TransationsHistoryScreen> {
                 ],
               ),
             ),
-            dropdownDeposit(widthScreen,heightScreen),
+            dropdownDeposit(widthScreen, heightScreen),
             Container(
               margin: const EdgeInsets.only(bottom: 20),
               height: heightScreen,
@@ -790,7 +790,7 @@ class _TransationsHistoryScreenState extends State<TransationsHistoryScreen> {
                 ],
               ),
             ),
-            dropdownWithdraw(widthScreen,heightScreen),
+            dropdownWithdraw(widthScreen, heightScreen),
             Container(
               margin: const EdgeInsets.only(bottom: 20),
               height: heightScreen,
@@ -1041,6 +1041,7 @@ class _TransationsHistoryScreenState extends State<TransationsHistoryScreen> {
         builder: (context, state) {
           return Scaffold(
               appBar: AppBar(
+                centerTitle: true,
                 title: const Text(
                   'Transations History',
                   style: TextStyle(

@@ -9,6 +9,7 @@ import 'package:peer_money/models/getAction.dart';
 import 'package:peer_money/models/urlApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:peer_money/testCode/sendOTPScreen.dart';
+import 'package:encrypt/encrypt.dart';
 
 class TestConnectController {
   Future<dynamic> registerPhoneNumber(
@@ -42,7 +43,12 @@ class TestConnectController {
       print(AppTextSetting.PHONE_NUMBER);
       print(result);
       if (result['data']['otp'] != null) {
-       /* var headers = {
+        
+        final plainText = result['data']['otp'];
+
+        
+      
+        /* var headers = {
           'accept': 'application/json',
           'Authorization':
               'Bearer d7fc83b3eb2c83c86a0bd7fcf462a48618acfe4c4dc50c1e53458d20ca1b7ec680f45dde82ff4d132a637d25847a544b889194d7ec7413abcb5273badb9a0f7e'
@@ -65,7 +71,7 @@ class TestConnectController {
           print(jsonDecode(res.body));
         }*/
 
-     var headers = {
+        /*var headers = {
           'accept': 'application/json',
           'Authorization':
               'Bearer d7fc83b3eb2c83c86a0bd7fcf462a48618acfe4c4dc50c1e53458d20ca1b7ec680f45dde82ff4d132a637d25847a544b889194d7ec7413abcb5273badb9a0f7e'
@@ -85,7 +91,7 @@ class TestConnectController {
           print(result);
         } else {
           print(result);
-        }
+        }*/
       }
       Navigator.push(
         context,

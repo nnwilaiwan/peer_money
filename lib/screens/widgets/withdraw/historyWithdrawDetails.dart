@@ -32,9 +32,9 @@ class _HistoryWithdrawDetailScreenState
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: const Text('Withdraw Details'),
               backgroundColor: AppTextSetting.COLOR_PRIMARY,
-              
             ),
             body: Center(
               child: Column(
@@ -96,7 +96,6 @@ class _HistoryWithdrawDetailScreenState
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF767676)),
                   ),
-                 
                   const SizedBox(height: 50),
                   Container(
                     margin: const EdgeInsets.only(left: 15, right: 15),
@@ -161,7 +160,7 @@ class _HistoryWithdrawDetailScreenState
                               // mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 const Text(
-                                  '0xcbf53666ddd2361ad1 tgtvdd556sEthereum (ERC20)2',
+                                  '0xcbf53666ddd2361ad1 tgtvdd556s',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                       fontFamily: AppTextSetting.APP_FONT,

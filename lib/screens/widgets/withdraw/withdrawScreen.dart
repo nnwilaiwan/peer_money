@@ -31,8 +31,6 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
     super.initState();
   }
 
-
-
   Container dropdownNetwork(double widthScreen, double heightScreen) {
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10),
@@ -314,6 +312,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: Text(
                 'Withdraw ${widget.title.toString()}',
                 style: const TextStyle(
@@ -378,9 +377,14 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                                 height: 47,
                                 margin: const EdgeInsets.only(right: 8),
                                 child: TextField(
+                                  style: const TextStyle(
+                                      fontSize: 14.0,
+                                      height: 2.0,
+                                      color: Colors.black),
                                   controller: depositAddress,
                                   cursorColor: const Color(0xFFD6D6D6),
                                   decoration: const InputDecoration(
+                                      contentPadding: EdgeInsets.all(10.0),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0xFFD6D6D6),
@@ -540,20 +544,24 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                                   controller: amountTxt,
                                   cursorColor: const Color(0xFFD6D6D6),
                                   decoration: const InputDecoration(
-                                      hintText: '0.0',
-                                      suffixText: 'ETH MAX',
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFFD6D6D6),
-                                        ),
+                                    hintText: '0.0',
+                                    suffixText: 'ETH MAX',
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFD6D6D6),
                                       ),
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF767676),
-                                        ),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFF767676),
                                       ),
-                                      suffixStyle: TextStyle(
-                                          color: AppTextSetting.COLOR_PRIMARY)),
+                                    ),
+                                    suffixStyle: TextStyle(
+                                      color: AppTextSetting.COLOR_PRIMARY,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 30),
@@ -627,7 +635,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                           ),
                         ),
                         Container(
-                          height: 450,
+                          height: heightScreen * 0.65,
                           child: SingleChildScrollView(
                             child:
                                 _tabSection(context, heightScreen, widthScreen),
@@ -639,10 +647,11 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                   ),
                 ),
                 Container(
+                  height: 80,
                   alignment: Alignment.bottomCenter,
-                  // color: Colors.amber,
-                  margin:
-                      const EdgeInsets.only(left: 20, right: 20,bottom: 50),
+                  color: Colors.white,
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.only(top: 650),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -677,7 +686,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                         ],
                       ),
                       Align(
-                        alignment: Alignment.bottomCenter,
+                        // alignment: Alignment.bottomCenter,
                         child: InkWell(
                           onTap: () {
                             Navigator.push(

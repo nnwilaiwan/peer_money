@@ -51,6 +51,7 @@ class _DepositDialogScreenState extends State<DepositDialogScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: Text(widget.title.toString()),
             ),
             body: Dialog(
