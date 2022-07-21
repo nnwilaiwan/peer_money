@@ -12,21 +12,45 @@ import 'package:encryptor/encryptor.dart';
 import 'package:peer_money/testCode/testencryp.dart';
 
 class SendOTPScreen extends StatefulWidget {
-  final void Function() onInit;
   const SendOTPScreen({Key? key, required this.onInit}) : super(key: key);
+
+  final void Function() onInit;
 
   @override
   State<SendOTPScreen> createState() => _SendOTPScreenState();
 }
 
 class _SendOTPScreenState extends State<SendOTPScreen> {
-  final txtOTP = TextEditingController();
-  String? otp_encode;
-  SendOTPController sendOTP = SendOTPController();
   String aes_secret =
       '9a9eb89b5ed9388720a8d23b328e79244b0b809a07f1829c22744ed2fde883be';
-  String code =
-      'U2FsdGVkX1+63k+ATpRwj/tGGbvRxveNzikBO2FvyrI=7';
+
+  String code = 'U2FsdGVkX1+63k+ATpRwj/tGGbvRxveNzikBO2FvyrI=7';
+
+  String? otp_encode;
+  SendOTPController sendOTP = SendOTPController();
+  final txtOTP = TextEditingController();
+
+  @override
+  void initState() {
+    // var plainText = AppTextSetting.OTP.toString();
+    // var key = aes_secret;
+
+    // var encrypted = Encryptor.encrypt(key, plainText);
+    // var decrypted = Encryptor.decrypt(key, encrypted);
+    // // final encrypter = enc.Encrypter(enc.AES(key1, mode: enc.AESMode.cbc));
+
+    // String encoded =
+    //     base64.encode(utf8.encode(encrypted)); // dXNlcm5hbWU6cGFzc3dvcmQ=
+
+    // print('==========');
+    // print(encoded);
+    // print(encrypted);
+    // print(decrypted);
+    // print('==========');
+
+    super.initState();
+  }
+
   encrypOTP() {
     var plainText = 'SOME DATA TO ENCRYPT';
     var key = aes_secret;
@@ -55,27 +79,6 @@ class _SendOTPScreenState extends State<SendOTPScreen> {
         encrypter.decrypt(enc.Encrypted.fromBase64(value), iv: iv);
     print(decrypted);
     return decrypted;
-  }
-
-  @override
-  void initState() {
-    // var plainText = AppTextSetting.OTP.toString();
-    // var key = aes_secret;
-
-    // var encrypted = Encryptor.encrypt(key, plainText);
-    // var decrypted = Encryptor.decrypt(key, encrypted);
-    // // final encrypter = enc.Encrypter(enc.AES(key1, mode: enc.AESMode.cbc));
-
-    // String encoded =
-    //     base64.encode(utf8.encode(encrypted)); // dXNlcm5hbWU6cGFzc3dvcmQ=
-
-    // print('==========');
-    // print(encoded);
-    // print(encrypted);
-    // print(decrypted);
-    // print('==========');
-
-    super.initState();
   }
 
   @override
@@ -145,7 +148,9 @@ class _SendOTPScreenState extends State<SendOTPScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    MyEncryptionDecryption().encryp('12345');
+                    // AesEncryptionDecryption.encryptAES('12345');
+                    MyEncryptionDecryption()
+                        .encryp(AppTextSetting.OTP.toString());
                   },
                   child: Container(
                     margin: const EdgeInsets.all(10),
@@ -175,8 +180,8 @@ class _SendOTPScreenState extends State<SendOTPScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    // MyEncryptionDecryption().decryp('12345');
-                    print(code.length);
+                    // MyEncryptionDecryption().decryp('vZ6b57xQ2hQ1IU6l059exA==');
+                    // print(code.length);
                   },
                   child: Container(
                     margin: const EdgeInsets.all(10),

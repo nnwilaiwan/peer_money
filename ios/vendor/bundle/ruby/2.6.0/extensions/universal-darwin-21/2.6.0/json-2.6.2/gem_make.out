@@ -1,0 +1,13 @@
+current directory: /Users/assuertechnology/Dev/Project/peer_money/ios/vendor/bundle/ruby/2.6.0/gems/json-2.6.2/ext/json
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20220720-83901-w375s0.rb extconf.rb
+creating Makefile
+
+current directory: /Users/assuertechnology/Dev/Project/peer_money/ios/vendor/bundle/ruby/2.6.0/gems/json-2.6.2/ext/json
+make "DESTDIR=" clean
+
+current directory: /Users/assuertechnology/Dev/Project/peer_money/ios/vendor/bundle/ruby/2.6.0/gems/json-2.6.2/ext/json
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+current directory: /Users/assuertechnology/Dev/Project/peer_money/ios/vendor/bundle/ruby/2.6.0/gems/json-2.6.2/ext/json
+make "DESTDIR=" install
