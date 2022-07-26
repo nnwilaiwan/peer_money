@@ -827,16 +827,9 @@ class _AssetsScreenState extends State<AssetsScreen> {
                         children: [
                           InkWell(
                             onTap: () {
-                              Navigator.push(
+                                Navigator.push(
                                 context,
-                                // MaterialPageRoute(
-                                //     builder: (context) => DepositDialogScreen(
-                                //           onInit: () {
-                                //             StoreProvider.of<AppState>(context)
-                                //                 .dispatch(getLoginAction);
-                                //           },
-                                //           title: item[i]['title'].toString(),
-                                //         )),
+                             
                                 MaterialPageRoute(
                                     builder: (context) => DepositScreen(
                                           onInit: () {
@@ -848,24 +841,30 @@ class _AssetsScreenState extends State<AssetsScreen> {
                                         )),
                               );
                               // print(item[i]['title'].toString());
-/*
-                              showDialog(
+
+                              /*showDialog(
+                                  useRootNavigator: false,
+                                  useSafeArea: false,
                                   context: context,
                                   builder: (context) {
                                     return DepositDialog(
+                                      onInit: () {
+                                        StoreProvider.of<AppState>(context)
+                                            .dispatch(getLoginAction);
+                                      },
                                       title: item[i]['title'].toString(),
                                     );
-                                    //   return DepositDialogScreen(
-                                    //     onInit: () {
-                                    //       StoreProvider.of<AppState>(context)
-                                    //           .dispatch(getLoginAction);
-                                    //     },
-                                    //     title: item[i]['title'].toString(),
-                                    //   );
+                                    // return DepositDialogScreen(
+                                    //   onInit: () {
+                                    //     StoreProvider.of<AppState>(context)
+                                    //         .dispatch(getLoginAction);
+                                    //   },
+                                    //   title: item[i]['title'].toString(),
+                                    // );
                                   });*/
                             },
                             child: Container(
-                              width: widthScreen *0.44,
+                              width: widthScreen * 0.44,
                               height: 38,
                               decoration: BoxDecoration(
                                 color: AppTextSetting.COLOR_PRIMARY,
@@ -908,7 +907,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                               //     widthScreen, item[i]['title'].toString());
                             },
                             child: Container(
-                              width: widthScreen *0.44,
+                              width: widthScreen * 0.44,
                               height: 38,
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -1022,8 +1021,12 @@ class _AssetsScreenState extends State<AssetsScreen> {
 }
 
 class DepositDialog extends StatefulWidget {
+  static const String id = "DepositDialog";
+
+  final void Function() onInit;
   final String? title;
-  const DepositDialog({Key? key, required this.title}) : super(key: key);
+  const DepositDialog({Key? key, required this.onInit, required this.title})
+      : super(key: key);
 
   @override
   State<DepositDialog> createState() => _DepositDialogState();
@@ -1051,9 +1054,9 @@ class _DepositDialogState extends State<DepositDialog> {
   Widget build(BuildContext context) {
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
-    // return StoreConnector<AppState, AppState>(
-    //     converter: (store) => store.state,
-    //     builder: (context, state) {
+    return StoreConnector<AppState, AppState>(
+        converter: (store) => store.state,
+        builder: (context, state) {
           return Dialog(
             insetPadding: EdgeInsets.zero,
             // contentPadding: EdgeInsets.zero,
@@ -1138,20 +1141,19 @@ class _DepositDialogState extends State<DepositDialog> {
                         imageBNB == 'assets/icons/icon-round.png';
                       });
 
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => DepositScreen(
-                      //             onInit: () {
-                      //               StoreProvider.of<AppState>(context)
-                      //                   .dispatch(getLoginAction);
-                      //             },
-                      //             title: widget.title,
-                      //             valueNetwork: '1',
-                      //           )),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DepositScreen(
+                                  onInit: () {
+                                    StoreProvider.of<AppState>(context)
+                                        .dispatch(getLoginAction);
+                                  },
+                                  title: widget.title,
+                                  valueNetwork: '1',
+                                )),
+                      );
                       // Navigator.pop(context);
-
                       print('Ethereum (ERC20)');
                     },
                     child: Container(
@@ -1208,19 +1210,19 @@ class _DepositDialogState extends State<DepositDialog> {
                         fontETH = Colors.black;
                         imageETH = 'assets/icons/icon-round.png';
 
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => DepositScreen(
-                        //             onInit: () {
-                        //               StoreProvider.of<AppState>(context)
-                        //                   .dispatch(getLoginAction);
-                        //             },
-                        //             title: widget.title,
-                        //             valueNetwork: '2',
-                        //           )),
-                        // );
-                        // Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DepositScreen(
+                                    onInit: () {
+                                      StoreProvider.of<AppState>(context)
+                                          .dispatch(getLoginAction);
+                                    },
+                                    title: widget.title,
+                                    valueNetwork: '2',
+                                  )),
+                        );
+                        Navigator.pop(context);
                       });
                       print('BNB Smart Chain (BEP20)');
                     },
@@ -1274,18 +1276,18 @@ class _DepositDialogState extends State<DepositDialog> {
                         imageETH = 'assets/icons/icon-round.png';
                         imageBNB = 'assets/icons/icon-round.png';
 
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => DepositScreen(
-                        //             onInit: () {
-                        //               StoreProvider.of<AppState>(context)
-                        //                   .dispatch(getLoginAction);
-                        //             },
-                        //             title: widget.title,
-                        //             valueNetwork: '3',
-                        //           )),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DepositScreen(
+                                    onInit: () {
+                                      StoreProvider.of<AppState>(context)
+                                          .dispatch(getLoginAction);
+                                    },
+                                    title: widget.title,
+                                    valueNetwork: '3',
+                                  )),
+                        );
                       });
                       print('Arbitrum One');
                     },
@@ -1321,6 +1323,6 @@ class _DepositDialogState extends State<DepositDialog> {
               ),
             ),
           );
-        // });
+        });
   }
 }

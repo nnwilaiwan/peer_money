@@ -53,7 +53,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                       Row(
                         children: [
                           Container(
-                            width: widthScreen * 0.8,
+                            width: widthScreen * 0.75,
                             height: widthScreen * 0.08,
                             padding: const EdgeInsets.all(2),
                             child: SingleChildScrollView(
@@ -343,6 +343,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
               children: [
                 Container(
                   // color: Colors.amber,
+                  margin: const EdgeInsets.only(left: 10, right: 10),
                   height: 740,
                   child: SingleChildScrollView(
                     child: Column(
@@ -609,7 +610,7 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                                           color: Color(0xFFA4A4A4),
                                         ),
                                         Text(
-                                          '  We will not credit your account with tokens from \nthat sale.',
+                                          ' We will not credit your account with tokens \nfromthat sale.',
                                           style: TextStyle(
                                             fontFamily: AppTextSetting.APP_FONT,
                                             fontSize: 14,
@@ -646,48 +647,54 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  height: 80,
+                Align(
                   alignment: Alignment.bottomCenter,
-                  color: Colors.white,
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.only(top: 650),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
-                          Text(
-                            'Receive amount',
-                            style: TextStyle(
-                                color: Color(0xFF000000),
-                                fontFamily: AppTextSetting.APP_FONT,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500),
+                  child: Container(
+                    // height: 120,
+                    height: widthScreen * 0.8,
+                    // alignment: Alignment.bottomCenter,
+                    color: Colors.white,
+                    // padding: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.only(top: 650),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 50,
+                          // color: Colors.amber,
+                          margin: const EdgeInsets.only(left: 20,bottom:20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Text(
+                                'Receive amount',
+                                style: TextStyle(
+                                    color: Color(0xFF000000),
+                                    fontFamily: AppTextSetting.APP_FONT,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                '5.5 ETH',
+                                style: TextStyle(
+                                    color: Color(0xFF000000),
+                                    fontFamily: AppTextSetting.APP_FONT,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                'network fee 0.00 ETH',
+                                style: TextStyle(
+                                    color: Color(0xFF9C9C9C),
+                                    fontFamily: AppTextSetting.APP_FONT,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ],
                           ),
-                          Text(
-                            '5.5 ETH',
-                            style: TextStyle(
-                                color: Color(0xFF000000),
-                                fontFamily: AppTextSetting.APP_FONT,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            'network fee 0.00 ETH',
-                            style: TextStyle(
-                                color: Color(0xFF9C9C9C),
-                                fontFamily: AppTextSetting.APP_FONT,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                      Align(
-                        // alignment: Alignment.bottomCenter,
-                        child: InkWell(
+                        ),
+                        InkWell(
                           onTap: () {
                             Navigator.push(
                               context,
@@ -702,8 +709,9 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                             );
                           },
                           child: Container(
-                            width: 145,
-                            height: 38,
+                            margin: const EdgeInsets.only(right: 20,bottom:20),
+                            width: 140,
+                            height: 40,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16),
@@ -726,8 +734,8 @@ class _WithdrawScreenState extends State<WithdrawScreen> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

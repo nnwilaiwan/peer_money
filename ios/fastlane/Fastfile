@@ -13,12 +13,18 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-# default_platform(:ios)
+default_platform(:ios)
 
 # platform :ios do
-#   desc "Description of what the lane does"
-#   lane :custom_lane do
-#     # add actions here: https://docs.fastlane.tools/actions
+#   desc "Generate new localized screenshots"
+#   lane :ios_beta_app do
+#     capture_screenshots(workspace: "Runner.xcworkspace", scheme: "Runner")
+#     build_app(
+#       skip_build_archive: true,
+#       archive_path: "../build/ios/archive/Runner.xcarchive",
+#     )
+#     upload_to_testflight
+    
 #   end
 # end
 
@@ -33,11 +39,10 @@ platform :ios do
         )
         firebase_app_distribution(
             app: "1:521623137589:ios:582d38edce7708f74b707c",
-            testers: "tassaneewan.w@assuretechnology.io,wilaiwan.k@assuretechnology.io",
+            testers: "wilaiwan.k@assuretechnology.io,nnww9978@gmail.com",
             release_notes: "Initial test version of the app",
             firebase_cli_path: "/usr/local/bin/firebase",
             ipa_path: "./build/Runner/Runner.ipa"
         )
     end
 end
-

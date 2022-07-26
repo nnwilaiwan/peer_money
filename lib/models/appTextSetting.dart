@@ -178,6 +178,38 @@ class AppTextSetting {
     },
   ];
 
+  static const dynamic LOAN_TREM = [
+    {
+      "id": "1",
+      "name": "3 Months",
+    },
+    {
+      "id": "2",
+      "name": "6 Months",
+    },
+    {
+      "id": "3",
+      "name": "12 Months",
+    },
+  ];
+
+  static const dynamic SELECT_COLLATERAL = [
+    {
+      "id": "1",
+      "name": "ETH",
+    },
+  ];
+
+  static const dynamic LIST_LOAN = [
+    {
+      "loan_no": "3000030145",
+      "value1": "11,996.927",
+      "value2": "113,500.00",
+      "status": "Waiting for Replay",
+      "date": "27 July 2022"
+    },
+  ];
+
   static String? OTP;
   static String? OTP_ENCRYPT;
   static String? REFERENCE_KRY;

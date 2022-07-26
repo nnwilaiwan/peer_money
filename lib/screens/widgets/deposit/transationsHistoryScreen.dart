@@ -44,7 +44,7 @@ class _TransationsHistoryScreenState extends State<TransationsHistoryScreen> {
             alignment: Alignment.center,
             height: 95,
             // color: Colors.red,
-            margin: const EdgeInsets.only(left: 10, right: 10),
+            margin: const EdgeInsets.only(left: 20, right: 20),
             child: Column(
               children: [
                 Container(
@@ -175,7 +175,7 @@ class _TransationsHistoryScreenState extends State<TransationsHistoryScreen> {
             alignment: Alignment.center,
             height: 95,
             // color: Colors.red,
-            margin: const EdgeInsets.only(left: 10, right: 10),
+            margin: const EdgeInsets.only(left: 20, right: 20),
             child: Column(
               children: [
                 Container(
@@ -306,7 +306,7 @@ class _TransationsHistoryScreenState extends State<TransationsHistoryScreen> {
             alignment: Alignment.center,
             height: 95,
             // color: Colors.red,
-            margin: const EdgeInsets.only(left: 10, right: 10),
+            margin: const EdgeInsets.only(left: 20, right: 20),
             child: Column(
               children: [
                 Container(

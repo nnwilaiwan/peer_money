@@ -1,2 +1,2 @@
-json_key_file("peer_money–> android –> app –> scr –> main –> AndroidManifest.xml") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
-package_name("peer_money") # e.g. com.krausefx.app
+json_key_file("") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("com.assuretechnology.peer_money") # e.g. com.krausefx.app

@@ -96,7 +96,7 @@ class _DepositScreenState extends State<DepositScreen> {
             alignment: Alignment.center,
             height: 90,
             // color: Colors.red,
-            margin: const EdgeInsets.only(left: 10, right: 10),
+            margin: const EdgeInsets.only(left: 15, right: 15),
             child: Column(
               children: [
                 Container(
@@ -281,8 +281,13 @@ class _DepositScreenState extends State<DepositScreen> {
                     ],
                   ),
                 ),
-                const Text("Deposit"),
-                const Text("User Body"),
+                Container(
+                  margin: const EdgeInsets.only(left: 15, right: 15),
+                  child: const Text("Deposit"),
+                ),
+                Container(
+                    margin: const EdgeInsets.only(left: 15, right: 15),
+                    child: const Text("User Body")),
               ],
             ),
           ),
@@ -600,7 +605,7 @@ class _DepositScreenState extends State<DepositScreen> {
               child: Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.all(13),
+                    margin: const EdgeInsets.only(left: 15,right: 15,top: 15),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,

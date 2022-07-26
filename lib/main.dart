@@ -10,10 +10,14 @@ import 'package:peer_money/models/reducer.dart';
 import 'package:peer_money/screens/assets/assetsScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreenDetail.dart';
+import 'package:peer_money/screens/loan/loanScreen.dart';
 import 'package:peer_money/screens/widgets/deposit/depdsitDialog.dart';
 import 'package:peer_money/screens/widgets/deposit/depositScreen.dart';
 import 'package:peer_money/screens/widgets/deposit/historyDetailScreen.dart';
 import 'package:peer_money/screens/widgets/deposit/transationsHistoryScreen.dart';
+import 'package:peer_money/screens/widgets/loanAmount/loanAmountScreen.dart';
+import 'package:peer_money/screens/widgets/loanAmount/loanConfirm.dart';
+import 'package:peer_money/screens/widgets/loanAmount/loanDetail.dart';
 import 'package:peer_money/screens/widgets/withdraw/confirmWithdraw.dart';
 import 'package:peer_money/screens/widgets/withdraw/historyWithdrawDetails.dart';
 import 'package:peer_money/screens/widgets/withdraw/verificationPinCode.dart';
@@ -116,7 +120,43 @@ class MyApp extends StatelessWidget {
             });
           },
           DepositDialogScreen.id: (context) {
-            return  DepositDialogScreen(
+            return DepositDialogScreen(
+              onInit: () {
+                StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+              },
+              title: null,
+            );
+          },
+          LoanScreen.id: (context) {
+            return LoanScreen(
+              onInit: () {
+                StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+              },
+            );
+          },
+           LoanAmountScreen.id: (context) {
+            return LoanAmountScreen(
+              onInit: () {
+                StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+              },
+            );
+          },
+            LoanDetailScreen.id: (context) {
+            return LoanDetailScreen(
+              onInit: () {
+                StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+              },
+            );
+          },
+           LoanConfirmScreen.id: (context) {
+            return LoanConfirmScreen(
+              onInit: () {
+                StoreProvider.of<AppState>(context).dispatch(getLoginAction);
+              },
+            );
+          },
+          DepositDialog.id: (context) {
+            return DepositDialog(
               onInit: () {
                 StoreProvider.of<AppState>(context).dispatch(getLoginAction);
               },

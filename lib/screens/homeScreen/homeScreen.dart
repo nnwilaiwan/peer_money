@@ -168,17 +168,18 @@ class _HomeScreenState extends State<HomeScreen> {
       child: BaseWidget(
         screenIndex: screenIndex,
         child: Scaffold(
-          appBar: 
-                  screenIndex.index == 1 ? NavigationMenuBar().mainAppBarAssest(context, 'Assets'):
-                  screenIndex.index == 2 ||
-                  screenIndex.index == 3
-              // screenIndex.index == 6 ||
-              // screenIndex.index == 7 ||
-              // screenIndex.index == 8 ||
-              // screenIndex.index == 9
-              ? null
-              : NavigationMenuBar().mainAppBar(
-                  context, ''), //NavigationMenuBar().appBar(context),
+          appBar: screenIndex.index == 1
+              ? NavigationMenuBar().mainAppBarAssest(context, 'Assets')
+              : screenIndex.index == 2
+                  ? NavigationMenuBar().mainAppBarAssest(context, 'Loan')
+                  : screenIndex.index == 3
+                      // screenIndex.index == 6 ||
+                      // screenIndex.index == 7 ||
+                      // screenIndex.index == 8 ||
+                      // screenIndex.index == 9
+                      ? null
+                      : NavigationMenuBar().mainAppBar(
+                          context, ''), //NavigationMenuBar().appBar(context),
           body: Container(
             //color: Color(AppTextSetting.APP_BG_COLOR), //Colors.grey[300],
             child: Container(

@@ -7,6 +7,7 @@ import 'package:peer_money/models/baseWidget.dart';
 import 'package:peer_money/screens/assets/assetsScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreen.dart';
 import 'package:peer_money/screens/homeScreen/homeScreenDetail.dart';
+import 'package:peer_money/screens/loan/loanScreen.dart';
 import 'package:peer_money/testCode/sendOTPScreen.dart';
 import 'package:peer_money/testCode/testCode.dart';
 import 'package:peer_money/testCode/testConnectApi.dart';
@@ -63,7 +64,7 @@ class _ContentWidgetState extends State<ContentWidget> {
       case 2:
         {
           {
-            return TestConnectApi(
+            return LoanScreen(
               onInit: () {
                 StoreProvider.of<AppState>(context).dispatch(getLoginAction);
               },
